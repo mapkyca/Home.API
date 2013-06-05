@@ -14,61 +14,66 @@
  */
 
 namespace home_io\i18n {
-/**
- * Internationalisation root class.
- */
-abstract class i18n {
 
-    protected static $i18n;
-    
-    abstract public function write($key, array $parameters = null, $language = null);
+    /**
+     * Internationalisation root class.
+     */
+    abstract class i18n {
 
-    abstract public function translationExists($key, $language = null);
-    
-    /**
-     * Remove special characters and return a transliterated version of text in URL compatible format
-     * 
-     * TODO: Find a better place
-     */
-    public static function transliterate($string) {
-        $string = iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Attempt the transliteration of non-ascii chars
-		
-        $string = preg_replace("/[^\w ]/","", $string);
+        protected static $i18n;
 
-        $string = str_replace(" ","-", $string);
-        $string = str_replace("--","-", $string);
-        $string = str_replace("/","-", $string);
-        $string = trim($string);
-        $string = strtolower($string);
-        
-        return $string;
-    }
-    
-    /**
-     * Alias for i18n::w()
-     */
-    public static function w($key, array $parameters = null, $language = null) { return static::getInstance()->write($key, $parameters, $language); }
-    
-    /**
-     * Return the current template engine.
-     * 
-     * @throws SubsystemFactoryException if no template is defined.
-     * @return i18n
-     */
-    public static function &getInstance() {
-        if (!self::$i18n) {
-            self::setInstance(\home_io\core\SubsystemFactory::factory('i18n'));
+        abstract public function write($key, array $parameters = null, $language = null);
+
+        abstract public function translationExists($key, $language = null);
+
+        /**
+         * Remove special characters and return a transliterated version of text in URL compatible format
+         * 
+         * TODO: Find a better place
+         */
+        public static function transliterate($string) {
+            $string = iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Attempt the transliteration of non-ascii chars
+
+            $string = preg_replace("/[^\w ]/", "", $string);
+
+            $string = str_replace(" ", "-", $string);
+            $string = str_replace("--", "-", $string);
+            $string = str_replace("/", "-", $string);
+            $string = trim($string);
+            $string = strtolower($string);
+
+            return $string;
         }
-        
-        return self::$i18n;
+
+        /**
+         * Alias for i18n::w()
+         */
+        public static function w($key, array $parameters = null, $language = null) {
+            return static::getInstance()->write($key, $parameters, $language);
+        }
+
+        /**
+         * Return the current template engine.
+         * 
+         * @throws SubsystemFactoryException if no template is defined.
+         * @return i18n
+         */
+        public static function &getInstance() {
+            if (!self::$i18n) {
+                self::setInstance(\home_io\core\SubsystemFactory::factory('i18n'));
+            }
+
+            return self::$i18n;
+        }
+
+        /**
+         * Set the default i18n engine.
+         * @param i18n $i18n 
+         */
+        public static function setInstance(i18n $i18n) {
+            self::$i18n = $i18n;
+        }
+
     }
-    
-    /**
-     * Set the default i18n engine.
-     * @param i18n $i18n 
-     */
-    public static function setInstance(i18n $i18n) {
-        self::$i18n = $i18n;
-    }
-}
+
 }
