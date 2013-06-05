@@ -212,5 +212,12 @@ namespace home_io\core {
         }
 
     }
-
+    
 }
+
+/* Define some shortcut definition */
+
+/// Forward browser back to original location
+define('REFERRER', -1);
+/// Forward browser back to original location
+define('REFERER', -1);
