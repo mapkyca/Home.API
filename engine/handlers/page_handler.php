@@ -17,17 +17,17 @@
  */
 
 namespace home_io\core {
-    
 
-require_once(dirname(dirname(__FILE__)) . '/start.php');
 
-$page = \home_io\core\Input::get('page');
+    require_once(dirname(dirname(__FILE__)) . '/start.php');
 
-header("X-Handler: home.io page handler");
+    $page = Input::get('page');
 
-if (!Page::call($page)) {
-    \home_io\core\Page::set404();
+    header("X-Handler: home.io page handler");
 
-    throw new \home_io\core\exceptions\PageNotFoundException(sprintf(\home_io\i18n\i18n::w('page:exception:notfound'), $page));
-}
+    if (!Page::call($page)) {
+        Page::set404();
+
+        throw new \home_io\core\exceptions\PageNotFoundException(sprintf(\home_io\i18n\i18n::w('page:exception:notfound'), $page));
+    }
 }
