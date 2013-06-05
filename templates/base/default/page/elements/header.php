@@ -5,7 +5,8 @@
 	<meta charset="utf-8" />
 	<title><?php
 		if (!empty($vars['title'])) { 
-			echo $vars['title'] . ' | ';
+			echo $vars['title']; 
+                        if (isset(\home_io\Home::$config->name)) ' | ';
 		}
 		if (isset(\home_io\Home::$config->name)) echo \home_io\Home::$config->name;
 	?></title>
