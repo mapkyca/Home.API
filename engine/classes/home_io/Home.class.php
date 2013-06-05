@@ -73,6 +73,8 @@ namespace home_io {
             \home_io\core\SubsystemFactory::registerConstructor('template', '\home_io\templates\Basic', array(self::$config->docroot . 'templates/base/'));
             \home_io\core\SubsystemFactory::registerConstructor('i18n', '\home_io\i18n\Basic', array(self::$config->docroot . 'i18n/', 'en'));
         
+            // Boot plugins
+            \home_io\plugins\Plugin::init();
         }
 
     }
