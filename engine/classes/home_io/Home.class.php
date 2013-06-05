@@ -51,7 +51,7 @@ namespace home_io {
 
             // Where on the file system are the website files stored (this is usally safe to leave autodetected)
             if (!isset(self::$config->docroot))
-                self::$config->docroot = dirname(dirname(dirname(__FILE__))) . '/';
+                self::$config->docroot = dirname(dirname(dirname(dirname(__FILE__)))) . '/';
 
             // Work out a site secret if not set. This is used in security calculations, so shouldn't be guessable but consistent each run.
             if (!isset(self::$config->site_secret))
