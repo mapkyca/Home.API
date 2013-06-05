@@ -45,7 +45,7 @@ namespace home_io\templates {
                 $vars = array();
 
             // Bring in config 
-            if (isset(Site::$config))
+            if (isset(\home_io\Home::$config))
                 $vars['config'] = \home_io\Home::$config;
 
             // Bring in runtime
