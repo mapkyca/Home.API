@@ -43,5 +43,5 @@ spl_autoload_register(function($class) {
 
 // Initialise the site
 global $CONFIG;
-Site::init($CONFIG);
+Home::init($CONFIG);
 
