@@ -1,8 +1,5 @@
 <?php
 
-require_once 'engine/start.php';
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+    require_once(dirname(__FILE__) . '/engine/start.php');
+    
+    echo home_io\templates\Template::getInstance()->outputPage("Hello World", "Hello World");

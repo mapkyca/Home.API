@@ -27,9 +27,9 @@ namespace home_io\core {
          */
         public static function getWebRoot(array $replacements = null) {
             if (!$replacements)
-                return self::$config->wwwroot;
-
-            $url = parse_url(self::$config->wwwroot);
+                return \home_io\Home::$config->wwwroot;
+            
+            $url = parse_url(\home_io\Home::$config->wwwroot);
 
             // perform any replacements
             foreach ($replacements as $key => $value)
