@@ -24,7 +24,7 @@ namespace home_io\i18n {
         private $current_language;
 
         public function __construct($path, $language = 'en') {
-            include_once($path . $language . 'i18n.php');
+            include_once($path . $language . '.i18n.php');
             $this->current_language = $language;
             $this->basepath = $path;
         }
