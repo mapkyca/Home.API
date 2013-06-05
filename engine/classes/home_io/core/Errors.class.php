@@ -30,37 +30,24 @@ namespace home_io\core {
          */
         public static function __error_handler($errno, $errmsg, $filename, $linenum, $vars) {
 
-            // Lazy loader sometimes doesn't handle errors too well, so load stats classes if not already present.
-            if (!class_exists('Stats'))
-                require_once(dirname(__FILE__) . '/Stats.class.php');
-            if (!class_exists('EtsyStatsdStats'))
-                require_once(dirname(__FILE__) . '/EtsyStatsdStats.class.php');
-
             $error = date("Y-m-d H:i:s (T)") . ": \"" . $errmsg . "\" in file " . $filename . " (line " . $linenum . ")";
 
-            try {
-                Stats::i('error.total');
+            switch ($errno) {
+                case E_USER_ERROR:
+                    Stats::i('error.error');
+                    Site::error($error);
+                    break;
 
-                switch ($errno) {
-                    case E_USER_ERROR:
-                        Stats::i('error.error');
-                        Site::error($error);
-                        break;
+                case E_WARNING :
+                case E_USER_WARNING :
+                    Stats::i('error.warning');
+                    Site::warning($error);
+                    break;
 
-                    case E_WARNING :
-                    case E_USER_WARNING :
-                        Stats::i('error.warning');
-                        Site::warning($error);
-                        break;
-
-                    default:
-                        Stats::i('error.debug');
-                        Site::log_echo($error, 'DEBUG');
-                }
-            } catch (Exception $e) {
-                die($e->getMessage());
+                default:
+                    Stats::i('error.debug');
+                    Site::log_echo($error, 'DEBUG');
             }
-
 
             return true;
         }
@@ -74,46 +61,28 @@ namespace home_io\core {
          */
         public static function __exception_handler($exception) {
 
-            // Lazy loader sometimes doesn't handle errors too well, so load stats classes if not already present.
-            if (!class_exists('Stats'))
-                require_once(dirname(__FILE__) . '/Stats.class.php');
-
-            // Log exception (and we can't have any exceptions)
-            try {
-                Stats::i('exception.total');
-                Stats::i('exception.' . strtolower(get_class($exception)));
-            } catch (Exception $e) {
-                die($e->getMessage());
-            }
-
             ob_end_clean(); // Clear existing / half empty buffer
+            
             // Log exception
-            Site::log_echo($exception->getMessage(), 'EXCEPTION');
-
-            // Optionally email exception
-            if (Site::$config->email_exceptions == true) {
-                mail(
-                        Site::$config->admin_email, 'EXCEPTION ' . Site::$config->name . " : " . $exception->getMessage(), $exception->getTraceAsString()
-                );
-            }
+            \home_io\core\Log::log_echo($exception->getMessage(), 'EXCEPTION');
 
             // If this is a platform exception then render it creatively, otherwise enforce the default
-            if ($exception instanceof SiteException)
+            if ($exception instanceof \home_io\core\exceptions\HomeException)
                 $body = "$exception";
             else
-                $body = Template::v('exceptions/__default', array('exception' => $exception));
+                $body = \home_io\templates\Template::v('exceptions/__default', array('exception' => $exception));
 
-            Template::getInstance()->outputPage(i18n::w('exception:title'), $body);
+            \home_io\templates\Template::getInstance()->outputPage(\home_io\i18n\i18n::w('exception:title'), $body);
         }
 
         public static function init() {
             // Now set php error handlers
-            if (Site::$config->debug)
-                set_error_handler('Errors::__error_handler', E_ALL & E_STRICT);
+            if ((isset(\home_io\Home::$config->debug)) && (\home_io\Home::$config->debug))
+                set_error_handler('\home_io\core\Errors::__error_handler', E_ALL & E_STRICT);
             else
-                set_error_handler('Errors::__error_handler', E_ALL & ~E_NOTICE); // Hide notice level errors when not in debug
+                set_error_handler('\home_io\core\Errors::__error_handler', E_ALL & ~E_NOTICE); // Hide notice level errors when not in debug
 
-            set_exception_handler('Errors::__exception_handler');
+            set_exception_handler('\home_io\core\Errors::__exception_handler');
         }
 
     }

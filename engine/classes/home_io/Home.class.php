@@ -28,7 +28,7 @@ namespace home_io {
         /**
          * Engine and site initialisation.
          */
-        public static function init(stdClass $config = null) {
+        public static function init(\stdClass $config = null) {
             if (!$config)
                 $config = new stdClass;
 
@@ -43,7 +43,7 @@ namespace home_io {
 
             // Temporary directory	
             if (!isset(self::$config->temp))
-                self::$config->temp = Environment::getTempDir() . md5(self::$config->url) . '/';
+                self::$config->temp = \home_io\core\Environment::getTempDir() . md5(self::$config->url) . '/';
 
             // Now ensure tmp dir is created
             @mkdir(self::$config->temp, 0777, true);
@@ -58,7 +58,7 @@ namespace home_io {
                 self::$config->site_secret = md5(self::$config->docroot . self::$config->url);
 
             // Initialise runtime
-            self::$runtime = new stdClass();
+            self::$runtime = new \stdClass();
 
             // Set some useful runtime variables
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') { // Flag if this is called via an AJAX call
