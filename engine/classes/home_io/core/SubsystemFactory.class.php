@@ -51,13 +51,13 @@ namespace home_io\core {
         public static function factory($label) {
             $subsystem = self::$constructorRegistry[$label];
             if (!$subsystem)
-                throw new SubsystemFactoryException("Subsystem Factory does not know how to make '$label'");
+                throw new \home_io\core\exceptions\SubsystemFactoryException("Subsystem Factory does not know how to make '$label'");
 
-            $reflect = new ReflectionClass($subsystem['class']);
+            $reflect = new \ReflectionClass($subsystem['class']);
             if (isset($subsystem['parameters']))
                 return $reflect->newInstanceArgs($subsystem['parameters']);
 
-            return Events::trigger("factory:$label", 'construct', array('return' => $reflect->newInstance()));
+            return \home_io\core\Events::trigger("factory:$label", 'construct', array('return' => $reflect->newInstance()));
         }
 
     }
