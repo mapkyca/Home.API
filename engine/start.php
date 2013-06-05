@@ -40,7 +40,7 @@ spl_autoload_register(function($class) {
     $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
     $file = dirname(__FILE__) . '/classes/' . $class . '.class.php';
     if (file_exists($file))
-        include($file);
+        include_once($file);
 });
 
 // Initialise the site
