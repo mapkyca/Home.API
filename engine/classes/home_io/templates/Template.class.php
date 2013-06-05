@@ -99,7 +99,7 @@ namespace home_io\templates {
          */
         public static function &getInstance() {
             if (!self::$template)
-                self::setInstance(SubsystemFactory::factory('template'));
+                self::setInstance(\home_io\core\SubsystemFactory::factory('template'));
 
             return self::$template;
         }
