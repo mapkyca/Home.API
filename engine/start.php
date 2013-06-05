@@ -31,7 +31,7 @@ require_once(dirname(__FILE__) . "/version.php");
 require_once(dirname(dirname(__FILE__)) . "/config/settings.php");
 
 // Include any domain specific configuration
-$settings_file = dirname(dirname(__FILE__)) . "/config/settings.{$_SERVER['SERVER_NAME']}.php"; echo $settings_file;
+$settings_file = dirname(dirname(__FILE__)) . "/config/settings.{$_SERVER['SERVER_NAME']}.php"; 
 if (file_exists($settings_file))
     require_once($settings_file);
 
