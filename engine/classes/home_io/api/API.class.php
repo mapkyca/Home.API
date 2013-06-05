@@ -20,6 +20,9 @@ namespace home_io\api {
         
         /// API Definition
         private static $api;
+        
+        /// Base path
+        private static $basepath;
     
         /**
          * Parse an API definition and generate the API.
@@ -113,8 +116,20 @@ namespace home_io\api {
          */
         public static function init($path_to_api_definitions) {
             
+            // Save base path
+            self::$basepath = $path_to_api_definitions;
+
+            // Load all conf files
+            if ($handle = opendir(self::$basepath)) {
+                    while ($api_def = readdir($handle)) {
+                        // must be directory and not begin with a .
+                        if ((substr($api_def, 0, 1) !== '.') && (!is_dir(self::$basepath . $api_def)) && (strpos($api_def, '.conf')!==false)) {
+                                self::parseAPIConf(self::$basepath . $api_def);
+                        }
+                    }
+            }
             
-            // TODO: Recursively load all .conf files.
+            // Register plugin class loader
             
         }
         
