@@ -109,6 +109,13 @@ class Errors {
             set_error_handler('Errors::__error_handler', E_ALL & ~E_NOTICE); // Hide notice level errors when not in debug
 
         set_exception_handler('Errors::__exception_handler');
+        
+        // Class loader for exceptions
+        spl_autoload_register(function($class) {
+            $file = dirname(__FILE__) . '/exceptions/' . $class . '.class.php';
+            if (file_exists($file))
+                include($file);
+        });
     }
 
 }
