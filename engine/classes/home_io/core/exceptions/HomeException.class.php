@@ -28,11 +28,11 @@ namespace home_io\core\exceptions {
             
             \home_io\core\Log::debug("Exception thrown: " . $this->getMessage());
 
-            $content = \home_io\core\Template::v("exceptions/$class", array('exception' => $this));
+            $content = \home_io\templates\Template::v("exceptions/$class", array('exception' => $this));
             if ($content)
                 return $content;
 
-            $content = \home_io\core\Template::v('exceptions/__default', array('exception' => $this));
+            $content = \home_io\templates\Template::v('exceptions/__default', array('exception' => $this));
             if ($content)
                 return $content;
 

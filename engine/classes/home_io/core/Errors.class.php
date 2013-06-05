@@ -34,19 +34,16 @@ namespace home_io\core {
 
             switch ($errno) {
                 case E_USER_ERROR:
-                    Stats::i('error.error');
-                    Site::error($error);
+                    \home_io\core\Log::error($error);
                     break;
 
                 case E_WARNING :
                 case E_USER_WARNING :
-                    Stats::i('error.warning');
-                    Site::warning($error);
+                    \home_io\core\Log::warning($error);
                     break;
 
                 default:
-                    Stats::i('error.debug');
-                    Site::log_echo($error, 'DEBUG');
+                    \home_io\core\Log::log_echo($error, 'DEBUG');
             }
 
             return true;
