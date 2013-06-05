@@ -9,14 +9,14 @@
  * 
  * This can be replaced by another template system if needed.
  * 
- * @package core
+ * @package templates
  * @copyright Marcus Povey 2013
  * @license $$LICENCE$$
  * @author Marcus Povey <marcus@marcus-povey.co.uk>
  * @link http://www.marcus-povey.co.uk
  */
 
-namespace home_io\core {
+namespace home_io\templates {
 
     /**
      * Define a template.

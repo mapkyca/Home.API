@@ -26,18 +26,18 @@
  * * Pages can be physical or virtual, created by Page::create()
  * * Look at Site::$runtime->isAjaxCall to find out if you're being called by ajax.
  */
-
 // Library files to include in order
 require_once(dirname(__FILE__) . "/version.php");
-require_once(dirname(__FILE__) . "/settings.php");
+require_once(dirname(dirname(__FILE__)) . "/config/settings.php");
 
 // Include any domain specific configuration
-$settings_file = "/settings.{$_SERVER['SERVER_NAME']}.php";
-if (file_exists(dirname(__FILE__) . $settings_file))
-    require_once(dirname(__FILE__) . $settings_file);
+$settings_file = dirname(dirname(__FILE__)) . "/settings.{$_SERVER['SERVER_NAME']}.php";
+if (file_exists($settings_file))
+    require_once($settings_file);
 
 // Register an autoloader
 spl_autoload_register(function($class) {
+    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
     $file = dirname(__FILE__) . '/classes/' . $class . '.class.php';
     if (file_exists($file))
         include($file);
@@ -45,5 +45,5 @@ spl_autoload_register(function($class) {
 
 // Initialise the site
 global $CONFIG;
-Home::init($CONFIG);
+\home_io\Home::init($CONFIG);
 

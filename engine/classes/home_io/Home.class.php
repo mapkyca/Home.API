@@ -12,7 +12,7 @@
  * @link http://www.marcus-povey.co.uk
  */
 
-namespace home_io\core {
+namespace home_io {
  
     /**
      * Main Home.io controller class.
