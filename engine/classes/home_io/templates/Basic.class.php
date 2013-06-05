@@ -68,7 +68,7 @@ namespace home_io\templates {
         }
 
         public function viewExists($view, $viewtype = 'default') {
-            foreach ($this->template_path as $base) {
+            foreach ($this->template_path as $base) { 
                 if (file_exists($base . "$viewtype/$view.php"))
                     return true;
             }
