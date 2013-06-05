@@ -38,7 +38,9 @@ if (file_exists(dirname(__FILE__) . $settings_file))
 
 // Register an autoloader
 spl_autoload_register(function($class) {
-    include(dirname(__FILE__) . '/classes/' . $class . '.class.php');
+    $file = dirname(__FILE__) . '/classes/' . $class . '.class.php';
+    if (file_exists($file))
+        include($file);
 });
 
 // Initialise the site
