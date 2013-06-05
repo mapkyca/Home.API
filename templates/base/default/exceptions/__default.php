@@ -1,6 +1,4 @@
 <?php
-	global $CONFIG;
-	
 	$exception = $vars['exception'];
 	$class = get_class($exception);
 	$class_lower = strtolower($class);
@@ -12,7 +10,7 @@
 	</div>
 
 <?php 
-	if ($CONFIG->debug) {
+	if (isset(\home_io\Home::$config->debug) && \home_io\Home::$config->debug) {
 ?>
     <h2>Debug output (only visible when $CONFIG->debug=true;)</h2>
 	<div class="debug">
