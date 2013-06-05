@@ -128,9 +128,7 @@ namespace home_io\api {
                         }
                     }
             }
-            
-            // Register plugin class loader
-            
+                        
         }
         
     }
