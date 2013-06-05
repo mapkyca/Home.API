@@ -79,6 +79,9 @@ namespace home_io {
         
             // Boot plugins
             \home_io\plugins\Plugin::init();
+            
+            // Boot API
+            \home_io\api\API::init(self::$config->docroot. 'api/'); // Boot API
         }
 
     }
