@@ -32,6 +32,10 @@ namespace home_io\i18n {
          * TODO: Find a better place
          */
         public static function transliterate($string) {
+            
+            if (!is_callable('iconv'))
+                throw new \home_io\core\exceptions\i18nException(i18n::w('i18n:exception:function_iconv_missing'));
+            
             $string = iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Attempt the transliteration of non-ascii chars
 
             $string = preg_replace("/[^\w ]/", "", $string);
