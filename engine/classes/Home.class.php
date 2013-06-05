@@ -13,7 +13,7 @@
  */
 
 namespace home_io\core {
-
+ 
     /**
      * Main Home.io controller class.
      */
