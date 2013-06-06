@@ -81,7 +81,7 @@ namespace home_io {
             \home_io\plugins\Plugin::init();
             
             // Boot API
-            \home_io\api\API::init(self::$config->docroot. 'api/'); // Boot API
+            \home_io\api\API::init(self::$config->docroot. 'def/'); // Boot API
         }
 
     }
