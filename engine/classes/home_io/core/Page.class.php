@@ -100,7 +100,7 @@ namespace home_io\core {
          * @param string $context The context
          */
         public static function setContext($context) {
-            Site::$runtime->page_context = $context;
+            \home_io\Home::$runtime->page_context = $context;
         }
 
         /**
@@ -108,7 +108,7 @@ namespace home_io\core {
          * @return string
          */
         public static function getContext() {
-            return Site::$runtime->page_context;
+            return \home_io\Home::$runtime->page_context;
         }
 
         /**

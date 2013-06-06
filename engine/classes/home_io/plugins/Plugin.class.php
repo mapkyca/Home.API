@@ -17,8 +17,9 @@ namespace home_io\plugins {
      * Plugin root class.
      */
     abstract class Plugin {
-    
         
+    
+        // TODO: Set configuration / variable commands.
         
         
         /**
@@ -26,18 +27,18 @@ namespace home_io\plugins {
          */
         public static function __plugin_class_autoloader($class) {
             $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-            $file_base = \home_io\Home::$config->docroot. 'plugins/' . $class . '/';
+            $file_base = \home_io\Home::$config->docroot. 'plugins/' . $class . '/'; 
             if (file_exists($file_base . 'start.php')) {
                 include_once($file_base . 'start.php');
                 
-                // Now boot languages etc
+                // TODO Now boot languages etc
             }
         }
         
         public static function init() {
             
             // Register plugin class autoloader
-            spl_autoload_register(array('\home_io\plugins\Plugin', '__plugin_class_autoloader'));
+            spl_autoload_register(array('\home_io\plugins\Plugin', '__plugin_class_autoloader'), false);
         }
         
     }
