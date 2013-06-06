@@ -193,7 +193,7 @@ namespace home_io\api {
                     if ($parameters = $mirror_method->getParameters())
                     {
                         foreach ($parameters as $param) {
-                            $value = $definition[$param->name];
+                            $value = Input::get($param->name);
                             if ((!$value) && ($param->isDefaultValueAvailable())) // No value, but coded default present
                                 $value = $param->getDefaultValue();
                             if (!$value) 
