@@ -55,7 +55,7 @@ namespace home_io\core {
 
             $reflect = new \ReflectionClass($subsystem['class']);
             if (isset($subsystem['parameters']))
-                return $reflect->newInstanceArgs($subsystem['parameters']);
+                return \home_io\core\Events::trigger("factory:$label", 'construct', array('return' => $reflect->newInstanceArgs($subsystem['parameters'])));
 
             return \home_io\core\Events::trigger("factory:$label", 'construct', array('return' => $reflect->newInstance()));
         }
