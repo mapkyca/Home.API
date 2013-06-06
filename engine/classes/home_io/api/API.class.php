@@ -142,7 +142,7 @@ namespace home_io\api {
                 
                 // Set viewtype 
                 Input::set('_vt', $format);
-                Log::debug("Viewtype set to" . Input::get('_vt'));
+                Log::debug("Viewtype set to " . Input::get('_vt'));
                 
                 // Sanity check method
                 if (!$method)
