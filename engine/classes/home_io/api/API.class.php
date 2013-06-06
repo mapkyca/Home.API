@@ -13,6 +13,8 @@
 
 namespace home_io\api {
     
+    use home_io\core\Log as Log;
+    
     /**
      * The API loader
      */
@@ -46,6 +48,9 @@ namespace home_io\api {
          */
         protected static function parseAPIConf($filename) {
             
+            // Some debug
+            Log::debug("Loading API definition from $filename");
+            
             // Read and parse API definition file
             $api = array();
             $current = null;
@@ -56,8 +61,11 @@ namespace home_io\api {
                 // Line of data
                 if (strlen($line) > 0)
                 {
-                    if (!$current)
+                    if (!$current) {
                         $current = $line; // First line, must be the endpoint def
+                        
+                        Log::debug("Beginning new endpoint $current");
+                    }
                     else
                     {
                         // Not the first line, tokenise the parameters
@@ -71,6 +79,7 @@ namespace home_io\api {
                         
                         // Set value of api definition key
                         $api[$current][$key] = $value;
+                        Log::debug("\t Storing $key => $value");
                     }
                 }
                 else 
