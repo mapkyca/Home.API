@@ -139,8 +139,8 @@ namespace home_io\api {
                 list($method, $format) = explode('.', $method_format);
                 
                 // Set viewtype 
-                Input::set('_vt', 'json');
-                Log::debug("Viewtype set to", Input::get('_vt'));
+                Input::set('_vt', $format);
+                Log::debug("Viewtype set to" . Input::get('_vt'));
                 
                 // Sanity check method
                 if (!$method)
