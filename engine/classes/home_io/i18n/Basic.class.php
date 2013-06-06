@@ -7,7 +7,7 @@
  * 
  * @package i18n
  * @copyright Marcus Povey 2013
- * @license $$LICENCE$$
+ * @license The MIT License (see LICENCE.txt), other licenses available.
  * @author Marcus Povey <marcus@marcus-povey.co.uk>
  * @link http://www.marcus-povey.co.uk
  */
