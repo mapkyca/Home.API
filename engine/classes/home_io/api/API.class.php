@@ -32,16 +32,16 @@ namespace home_io\api {
          * An api definition file is a file consisting of one or more API configurations, separated by one or more blank lines.
          * 
          * A definition begins with path to link the API up to, basically the GET path you want the api exposed as.
-         * The next lines should contain the class to load, and any parameters in a colon separated form, with each tuple appearing on a new line, e.g.
+         * The next lines should contain the class to load, and any parameters separated by a space, with each tuple appearing on a new line, e.g.
          * 
          * /my/api/definition
-         *      class: \namespace\to\MyAPIClass
-         *      param1: value
-         *      param2: value
+         *      class \namespace\to\MyAPIClass
+         *      param1 value
+         *      param2 value
          * 
          * /my/second/api/definition
-         *      class: \namespace\to\SecondAPIClass
-         *      param1: value
+         *      class \namespace\to\SecondAPIClass
+         *      param1 value
          * 
          * 
          * @param type $filename
@@ -69,17 +69,17 @@ namespace home_io\api {
                     else
                     {
                         // Not the first line, tokenise the parameters
-                        $params = explode(':',$line, 2); // Tokenise parameters
+                        $params = explode(' ',$line, 2); // Tokenise parameters
                         $key = trim($params[0]);
                         $value = trim($params[1]);
                         
                         // Create definition entry if not already there
-                        if (!is_array($api[$current]))
+                        if (!isset($api[$current]))
                             $api[$current] = array();
                         
                         // Set value of api definition key
                         $api[$current][$key] = $value;
-                        Log::debug("\t Storing $key => $value");
+                        Log::debug("    Storing $key => $value");
                     }
                 }
                 else 
@@ -109,10 +109,10 @@ namespace home_io\api {
             
             // Validate definition
             if (!isset($definition['class'])) 
-                throw new APIException(\home_io\i18n\i18n::w ('api:exception:class_not_specified'));
+                throw new APIException(\home_io\i18n\i18n::w ('api:exception:class_not_specified', array($endpoint)));
 
             if (!class_exists($definition['class'])) 
-                throw new APIException(\home_io\i18n\i18n::w ('api:exception:class_not_found'));
+                throw new APIException(\home_io\i18n\i18n::w ('api:exception:class_not_found', array($definition['class'])));
 
             // If we've got here, the class has been specified and exists, so its safe to link it up
             self::$api[$endpoint] = $definition;
