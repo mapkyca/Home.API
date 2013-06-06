@@ -23,6 +23,10 @@ namespace example {
                 'param2' => $this->param2
             );
         }
+        
+        public function sayhello($to = 'you') {
+            return "Hello $to!";
+        }
     }
     
 }

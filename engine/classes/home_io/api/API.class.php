@@ -60,7 +60,9 @@ namespace home_io\api {
             $current = null;
             $f = fopen($filename, 'r');
             while (!feof($f)) {
-                $line = trim(fgets($f));
+                list($line) = explode('#', fgets($f));
+                $line = trim($line);
+                
                 
                 // Line of data
                 if (strlen($line) > 0)
