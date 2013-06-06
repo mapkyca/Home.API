@@ -26,9 +26,12 @@ namespace home_io\plugins {
          */
         public static function __plugin_class_autoloader($class) {
             $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-            $file = \home_io\Home::$config->docroot. 'plugins/' . $class . '/start.php'; 
-            if (file_exists($file))
-                include_once($file);
+            $file_base = \home_io\Home::$config->docroot. 'plugins/' . $class . '/';
+            if (file_exists($file_base . 'start.php')) {
+                include_once($file_base . 'start.php');
+                
+                // Now boot languages etc
+            }
         }
         
         public static function init() {
