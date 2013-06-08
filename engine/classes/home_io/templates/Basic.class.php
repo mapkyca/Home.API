@@ -52,7 +52,8 @@ namespace home_io\templates {
             $vars['runtime'] = \home_io\Home::$runtime;
 
             $pre = $main = $post = null;
-
+            
+            ob_start();
             if ($this->viewExists($view, $viewtype)) {
                 foreach ($this->template_path as $base) {
                     // Prepend view
@@ -77,7 +78,8 @@ namespace home_io\templates {
                 \home_io\core\Log::warning("Template $viewtype/$view could not be found.");
             }
 
-            return $pre.$main.$post;
+            echo $pre.$main.$post;
+            return ob_get_clean();
         }
 
         public function viewExists($view, $viewtype = 'default') {
