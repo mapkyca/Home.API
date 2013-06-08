@@ -3,7 +3,7 @@
     if (Site::$config->debug) {
 	
 ?>
-<div class="object default debug">
+<div class="plugin default debug">
     <pre>
 <?php echo var_export($vars['object']); ?>
     </pre>
