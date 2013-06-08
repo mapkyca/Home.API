@@ -20,15 +20,14 @@ namespace home_io\core {
 
         /// Events management
         protected static $events;
-
+        
         /**
          * Register an event listener with the system.
          *
          * An event listener can be set to listen for a specific event, or a collection of events using wildcards.
          *
-         * Namespaces are used to define the namespace of the event, typically this is the object hierachy if dealing
-         * with a DataObject.
-         *
+         * Namespaces are used to define the namespace of the event.
+         * 
          * The function being registered must have the following prototype:
          *
          * \code
@@ -136,6 +135,17 @@ namespace home_io\core {
             }
 
             return $parameters['return'];
+        }
+
+        
+        /**
+         * Return whether a given event has a handler.
+         * @param type $namespace
+         * @param type $event
+         * @return bool
+         */
+        public static function exists($namespace, $event) { 
+            return is_array(self::$events[$namespace][$event]);
         }
 
     }

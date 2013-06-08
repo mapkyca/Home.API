@@ -51,20 +51,33 @@ namespace home_io\templates {
             // Bring in runtime
             $vars['runtime'] = \home_io\Home::$runtime;
 
-            ob_start();
+            $pre = $main = $post = null;
 
             if ($this->viewExists($view, $viewtype)) {
                 foreach ($this->template_path as $base) {
+                    // Prepend view
+                    ob_start();
+                    \home_io\core\Events::trigger("view:$viewtype:".str_replace('/',':',$view), 'prepend', array_merge($vars, array('return' => true)));
+                    $pre = ob_get_clean();
+                    
+                    // Include base view
+                    ob_start();
                     if (file_exists($base . "$viewtype/$view.php")) {
                         include($base . "$viewtype/$view.php");
                         break;
                     }
+                    $main = ob_get_clean();
+                    
+                    // Extend view 
+                    ob_start();
+                    \home_io\core\Events::trigger("view:$viewtype:".str_replace('/',':',$view), 'extend', array_merge($vars, array('return' => true)));
+                    $post = ob_get_clean();
                 }
             } else {
                 \home_io\core\Log::warning("Template $viewtype/$view could not be found.");
             }
 
-            return ob_get_clean();
+            return $pre.$main.$post;
         }
 
         public function viewExists($view, $viewtype = 'default') {
@@ -73,6 +86,14 @@ namespace home_io\templates {
                     return true;
             }
 
+            // Now see if this has been "prepended"
+            if (\home_io\core\Events::exists("view:$viewtype:".str_replace('/',':',$view), 'prepend'))
+                    return true;
+            
+            // Now see if this has been "extended"
+            if (\home_io\core\Events::exists("view:$viewtype:".str_replace('/',':',$view), 'extend'))
+                    return true;
+            
             return false;
         }
 
