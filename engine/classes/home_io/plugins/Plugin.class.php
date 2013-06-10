@@ -45,6 +45,13 @@ namespace home_io\plugins {
         }
 
         /**
+         * Render the data object using the views system, using defaults.
+         */
+        public function __toString() {
+            return $this->view();
+        }
+
+        /**
          * When passed API call and definition details, this function will use reflection and return
          * a new instance of the appropriate class, initialised with the API arguments got from the definition.
          * @param type $call
@@ -67,8 +74,9 @@ namespace home_io\plugins {
                     if (!$value)
                         throw new PluginException(i18n::w('plugin:exception:missing_construction_parameter', array($param->name, $definition['class']))); // Still no value, throw an exception
 
+
                         
-                    // We have a value, save it.
+// We have a value, save it.
                     $creation_parameters[] = $value;
                 }
             }
