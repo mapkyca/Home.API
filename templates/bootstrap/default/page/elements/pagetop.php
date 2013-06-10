@@ -3,7 +3,7 @@
 
     if (empty($vars['noheader'])) {
 
-        echo \home_io\templates\Template::v('page/elements/topnav', $vars);
+        echo \home_api\templates\Template::v('page/elements/topnav', $vars);
 ?>
 <div id="header">
     <div class="container">  

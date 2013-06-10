@@ -1,6 +1,6 @@
 <?php
 
-namespace home_io\i18n {
+namespace home_api\i18n {
 
     $errors = array(
         // System
@@ -21,9 +21,9 @@ namespace home_io\i18n {
     );
 
     $dashboard = array(
-        'home_io:dashboard' => 'Dashboard',
-        'home_io:welcome' => 'Welcome',
-        'home_io:top' => 'Top',
+        'home_api:dashboard' => 'Dashboard',
+        'home_api:welcome' => 'Welcome',
+        'home_api:top' => 'Top',
     );
 
     Basic::register($errors, 'en');

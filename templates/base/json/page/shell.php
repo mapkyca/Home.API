@@ -8,7 +8,7 @@
 
     $out = new stdClass;
     
-    if ($message = \home_io\templates\Template::v('page/elements/messages'))
+    if ($message = \home_api\templates\Template::v('page/elements/messages'))
         $out->messages = json_decode($message);
   //  else {
         if ($output = json_decode($vars['body']))

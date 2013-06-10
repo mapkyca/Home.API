@@ -13,7 +13,7 @@
  */
 require_once(dirname(dirname(__FILE__)) . '/start.php');
 
-$css = \home_io\templates\Template::v('css');
+$css = \home_api\templates\Template::v('css');
 
 header('Etag: ' . md5($css));
 header('Content-Length: ' . strlen($css));

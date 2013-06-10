@@ -62,6 +62,6 @@
 	}
 	?>
 	>
-	<?php echo \home_io\templates\Template::v('input/securitytoken'); ?>
+	<?php echo \home_api\templates\Template::v('input/securitytoken'); ?>
 	<?php echo $vars['body']; ?>
 </form>

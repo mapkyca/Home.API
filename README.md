@@ -1,4 +1,4 @@
-Home.IO: An Extensible API for your House
+Home.API: An Extensible API for your House
 =========================================
 
 Modern homes contain an ever increasing number of inputs and outputs - smart electricity & water meters, Current Cost monitors, WeMo sockets and a whole smorgosboard of X10 enabled gizmos and homebrew Raspberry Pi hardware hacks.

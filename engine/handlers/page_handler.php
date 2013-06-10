@@ -16,18 +16,18 @@
  * @link http://www.marcus-povey.co.uk
  */
 
-namespace home_io\core {
+namespace home_api\core {
 
 
     require_once(dirname(dirname(__FILE__)) . '/start.php');
 
     $page = Input::get('page');
 
-    header("X-Handler: home.io page handler");
+    header("X-Handler: Home.API page handler");
 
     if (!Page::call($page)) {
         Page::set404();
 
-        throw new \home_io\core\exceptions\PageNotFoundException(sprintf(\home_io\i18n\i18n::w('page:exception:notfound'), $page));
+        throw new \home_api\core\exceptions\PageNotFoundException(sprintf(\home_api\i18n\i18n::w('page:exception:notfound'), $page));
     }
 }

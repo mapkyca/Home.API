@@ -2,7 +2,7 @@
 /**
  * @file
  * 
- * Example Home.io plugin
+ * Example Home.API plugin
  * 
  * @package example
  * @copyright Marcus Povey 2013
@@ -14,7 +14,7 @@
 
 namespace example {
     
-    class Example extends \home_io\plugins\Plugin {
+    class Example extends \home_api\plugins\Plugin {
         
         private $param1;
         private $param2;

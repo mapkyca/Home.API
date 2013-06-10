@@ -4,7 +4,7 @@
 ?>
 <div class="list default">
     <?php if (($vars['pagination']) && ($vars['total']))
-	echo \home_io\templates\Template::v('data/lists/elements/pagination', $vars);?>
+	echo \home_api\templates\Template::v('data/lists/elements/pagination', $vars);?>
     <ul>
     <?php 
 	if (is_array($objects))

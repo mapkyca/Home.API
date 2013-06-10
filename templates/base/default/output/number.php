@@ -1,3 +1,3 @@
 <?php
 
-echo \home_io\templates\Template::v('output/text', $vars);
+echo \home_api\templates\Template::v('output/text', $vars);

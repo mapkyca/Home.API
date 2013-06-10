@@ -13,7 +13,7 @@
  */
 require_once(dirname(dirname(__FILE__)) . '/start.php');
 
-$js = \home_io\templates\Template::v('js');
+$js = \home_api\templates\Template::v('js');
 
 header('Etag: ' . md5($js));
 header('Content-Length: ' . strlen($js));

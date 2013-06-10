@@ -12,6 +12,6 @@
 header("Content-type: text/html; charset=UTF-8");
 ?><!DOCTYPE html>
 <html>
-<?php echo \home_io\templates\Template::v('page/elements/header', $vars); ?>
-<?php echo \home_io\templates\Template::v('page/elements/body', $vars); ?>
+<?php echo \home_api\templates\Template::v('page/elements/header', $vars); ?>
+<?php echo \home_api\templates\Template::v('page/elements/body', $vars); ?>
 </html>

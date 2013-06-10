@@ -45,13 +45,13 @@
 
 			if ($type != 'hidden') {
 			?>
-			<p class="<?php echo (++$n % 2 == 1) ? 'odd' : 'even'; ?> <?php echo $field; ?>"><label class="<?php echo $field; ?>"><?php echo i18n::w("formbody:$name:$field");?> <?php echo \home_io\templates\Template::v("input/$type", $params); ?></label></p>
+			<p class="<?php echo (++$n % 2 == 1) ? 'odd' : 'even'; ?> <?php echo $field; ?>"><label class="<?php echo $field; ?>"><?php echo i18n::w("formbody:$name:$field");?> <?php echo \home_api\templates\Template::v("input/$type", $params); ?></label></p>
 			<?php
 			} else
-			    echo \home_io\templates\Template::v("input/$type", $params);
+			    echo \home_api\templates\Template::v("input/$type", $params);
 		}
 		
 		if ($values instanceof DataObject)
-		    echo \home_io\templates\Template::v('input/hidden', array('name' => 'object_id', 'value' => $values->getId()));
+		    echo \home_api\templates\Template::v('input/hidden', array('name' => 'object_id', 'value' => $values->getId()));
 		
 	}

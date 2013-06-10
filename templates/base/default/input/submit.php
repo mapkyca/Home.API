@@ -3,4 +3,4 @@
 	$vars['type'] = 'submit';
 	if (!$vars['class']) $vars['class'] = "input-submit";
 		
-	echo \home_io\templates\Template::v('input/button', $vars);
+	echo \home_api\templates\Template::v('input/button', $vars);

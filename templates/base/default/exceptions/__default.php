@@ -10,7 +10,7 @@
 	</div>
 
 <?php 
-	if (isset(\home_io\Home::$config->debug) && \home_io\Home::$config->debug) {
+	if (isset(\home_api\Home::$config->debug) && \home_api\Home::$config->debug) {
 ?>
     <h2>Debug output (only visible when $CONFIG->debug=true;)</h2>
 	<div class="debug">

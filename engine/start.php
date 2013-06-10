@@ -13,7 +13,7 @@
  */
 /**
  * \mainpage 
- * Welcome to Home.IO, a pluggable API for your house!
+ * Welcome to Home.API, a pluggable API for your house!
  * 
  * Important code concepts
  * =======================
@@ -45,5 +45,5 @@ spl_autoload_register(function($class) {
 
 // Initialise the site
 global $CONFIG;
-\home_io\Home::init($CONFIG);
+\home_api\Home::init($CONFIG);
 
