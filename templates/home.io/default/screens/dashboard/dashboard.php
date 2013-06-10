@@ -9,7 +9,7 @@
         <?php
         try {
             if ($plugin = home_io\plugins\Plugin::getInstance($definition))
-                    echo $plugin->view();
+                    echo $plugin->view(array('call' => $call));
         } catch (\home_io\plugins\PluginException $e) {
             ?>
 <div class="alert alert-error">
@@ -20,3 +20,44 @@
         }
     }
     
+?>
+
+<script>
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    
+    $(document).ready(function(){
+        $('form.api-call').submit(function(){
+            
+            var self = this;
+            
+            $.ajax({  
+                type: "GET",  
+                url: $(this).attr('action'),
+                data: $(this).serialize(),  
+                dataType: "json",  
+
+                success: function(msg, status, jqXHR){  
+                    var id = $(self).attr('id'); 
+                    $('#' + id + ' div.result').html("<pre class=\"alert alert-success\">" + jqXHR.responseText + "</pre>");
+                    $('#' + id + ' div.result').fadeIn();
+                },  
+                error: function(){  
+                    var id = $(this).attr('id');
+                    $('#' + id + ' div.result').html("<pre class=\"alert alert-error\">There was a problem submitting this API call.</pre>");
+                    $('#' + id + ' div.result').fadeIn();
+                }  
+            });  
+            
+            return false;
+        });
+        
+        $('form.api-call a.submit').click(function(){
+            
+            $(this).parent('form').submit();
+            
+            return false;
+        });
+    });
+</script>
