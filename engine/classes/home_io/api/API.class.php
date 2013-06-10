@@ -164,7 +164,7 @@ namespace home_io\api {
                     // Build reflection class
                     $mirror = new \ReflectionClass($definition['class']);
                     
-                    $object = Plugin::getInstance($call, $definition);
+                    $object = Plugin::getInstance($definition);
                     
                     // Get method, and see what parameters it needs
                     if (!$mirror_method = $mirror->getMethod($method))

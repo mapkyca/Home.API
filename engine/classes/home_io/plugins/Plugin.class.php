@@ -54,10 +54,9 @@ namespace home_io\plugins {
         /**
          * When passed API call and definition details, this function will use reflection and return
          * a new instance of the appropriate class, initialised with the API arguments got from the definition.
-         * @param type $call
          * @param array $definition
          */
-        public static function getInstance($call, array $definition) {
+        public static function getInstance(array $definition) {
             // Build reflection class
             $mirror = new \ReflectionClass($definition['class']);
 

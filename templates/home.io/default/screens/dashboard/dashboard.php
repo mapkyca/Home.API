@@ -6,7 +6,7 @@
     foreach ($api as $call => $definition) {
 
         try {
-            if ($plugin = home_io\plugins\Plugin::getInstance($call, $definition))
+            if ($plugin = home_io\plugins\Plugin::getInstance($definition))
                     echo $plugin->view();
         } catch (\home_io\plugins\PluginException $e) {
             ?>
