@@ -62,12 +62,10 @@ namespace home_io\templates {
                     $pre = ob_get_clean();
                     
                     // Include base view
-                    ob_start();
                     if (file_exists($base . "$viewtype/$view.php")) {
                         include($base . "$viewtype/$view.php");
                         break;
                     }
-                    $main = ob_get_clean();
                     
                     // Extend view 
                     ob_start();
@@ -78,8 +76,7 @@ namespace home_io\templates {
                 \home_io\core\Log::warning("Template $viewtype/$view could not be found.");
             }
 
-            echo $pre.$main.$post;
-            return ob_get_clean();
+            return $pre . ob_get_clean() . $post;
         }
 
         public function viewExists($view, $viewtype = 'default') {

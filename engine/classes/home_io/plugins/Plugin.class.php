@@ -27,7 +27,7 @@ namespace home_io\plugins {
          * @return type 
          */
         public function view(array $vars = null) {
-            $class = strtolower(get_class($this));
+            $class = get_class($this);
 
             if (!$vars)
                 $vars = array();

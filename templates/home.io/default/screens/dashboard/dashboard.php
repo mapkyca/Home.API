@@ -7,8 +7,7 @@
 
         try {
             if ($plugin = home_io\plugins\Plugin::getInstance($call, $definition))
-                    echo $plugin;
-        
+                    echo $plugin->view();
         } catch (\home_io\plugins\PluginException $e) {
             ?>
 <div class="alert alert-error">
