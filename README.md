@@ -3,7 +3,7 @@ Home.API: An Extensible API for your House
 
 Modern homes contain an ever increasing number of inputs and outputs - smart electricity & water meters, Current Cost monitors, WeMo sockets and a whole smorgosboard of X10 enabled gizmos and homebrew Raspberry Pi hardware hacks.
 
-Wouldn't it be cool if you could control all of these from a central place? Wouldn't it be cool if you could simple expose a common API for all of these devices, lowering the bar to writing cool applications?
+Wouldn't it be cool if you could control all of these from a central place? Wouldn't it be cool if you could simple expose a common API for all of these devices and talk to them using standard web technologies, lowering the bar to writing cool applications?
 
 I think so! :)
 
@@ -16,14 +16,14 @@ Pre-requisites
 --------------
 
  * Apache2 with ModRewrite enabled
- * PHP 5.3
+ * PHP 5.3+
 
 Installation
 ------------
 
  * Git checkout the repo on to your house server/network connected Raspberry Pi/Whatever
  * Rename htaccess_dist to .htaccess, after making the appropriate modifications (which amounts to setting the RewriteBase correctly if you're running in a subdirectory on your server)
- * Make any modifications to config/settings.php that you need, although the defaults are usually good
+ * Make any modifications to config/settings.php that you need, although the defaults are usually good. If you're installing to a sub directory you might have to change $CONFIG->wwwroot
  * Define your api in the various endpoint definition .conf files in dev/
 
 Format of an endpoint definition file
