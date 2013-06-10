@@ -75,7 +75,7 @@ Format of a plugin
 ------------------
 
  * Plugins should be put in /plugins/ in a directory structure matching the class' namespace
- * All plugins must extend \home_io\plugins\Plugin, but don't have to sit in that namespace
+ * All plugins must extend \home_api\plugins\Plugin, but don't have to sit in that namespace
  * All plugins classes should be in /plugins/my/class/namespace/MyClass/start.php (see the Example plugin for an example)
  * Public methods in the class are exposed automatically, Home.io uses reflection to determine required parameters and any default values. Again, see the Example plugin.
 
