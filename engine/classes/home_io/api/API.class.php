@@ -18,6 +18,7 @@ namespace home_io\api {
     use home_io\i18n\i18n as i18n;
     use home_io\core\Input as Input;
     use home_io\templates\Template as Template;
+    use home_io\plugins\Plugin as Plugin;
     
     /**
      * The API loader
@@ -163,33 +164,7 @@ namespace home_io\api {
                     // Build reflection class
                     $mirror = new \ReflectionClass($definition['class']);
                     
-                    // Construct constructor parameters
-                    $creation_parameters = array();
-                    $constructor = $mirror->getConstructor();
-                    if (!$constructor) 
-                        throw new APIException(i18n::w('api:exception:no_constructor', array($definition['class'])));
-                    if ($parameters = $constructor->getParameters())
-                    {
-                        foreach ($parameters as $param) {
-                            $value = $definition[$param->name];
-                            if ((!$value) && ($param->isDefaultValueAvailable())) // No value, but coded default present
-                                $value = $param->getDefaultValue();
-                            if (!$value) 
-                                throw new APIException(i18n::w ('api:exception:missing_construction_parameter', array($param->name, $definition['class']))); // Still no value, throw an exception
-                                
-                            // We have a value, save it.
-                            $creation_parameters[] = $value;
-                        }
-                    }
-                    
-                    // Create object with constructed parameters
-                    if (count($creation_parameters))
-                        $object = $mirror->newInstanceArgs($creation_parameters);
-                    else
-                        $object = $mirror->newInstance();
-                    
-                    if (!$object)
-                        throw new APIException(i18n::w ('api:exception:could_not_create_instance', array($definition['class'])));
+                    $object = Plugin::getInstance($call, $definition);
                     
                     // Get method, and see what parameters it needs
                     if (!$mirror_method = $mirror->getMethod($method))

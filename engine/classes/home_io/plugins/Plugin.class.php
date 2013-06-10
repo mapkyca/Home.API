@@ -45,6 +45,47 @@ namespace home_io\plugins {
         }
 
         /**
+         * When passed API call and definition details, this function will use reflection and return
+         * a new instance of the appropriate class, initialised with the API arguments got from the definition.
+         * @param type $call
+         * @param array $definition
+         */
+        public static function getInstance($call, array $definition) {
+            // Build reflection class
+            $mirror = new \ReflectionClass($definition['class']);
+
+            // Construct constructor parameters
+            $creation_parameters = array();
+            $constructor = $mirror->getConstructor();
+            if (!$constructor)
+                throw new PluginException(i18n::w('plugin:exception:no_constructor', array($definition['class'])));
+            if ($parameters = $constructor->getParameters()) {
+                foreach ($parameters as $param) {
+                    $value = $definition[$param->name];
+                    if ((!$value) && ($param->isDefaultValueAvailable())) // No value, but coded default present
+                        $value = $param->getDefaultValue();
+                    if (!$value)
+                        throw new PluginException(i18n::w('plugin:exception:missing_construction_parameter', array($param->name, $definition['class']))); // Still no value, throw an exception
+
+                        
+                    // We have a value, save it.
+                    $creation_parameters[] = $value;
+                }
+            }
+
+            // Create object with constructed parameters
+            if (count($creation_parameters))
+                $object = $mirror->newInstanceArgs($creation_parameters);
+            else
+                $object = $mirror->newInstance();
+
+            if (!$object)
+                throw new PluginException(i18n::w('plugin:exception:could_not_create_instance', array($definition['class'])));
+
+            return $object;
+        }
+
+        /**
          * Autoload class files
          */
         public static function __plugin_class_autoloader($class) {
