@@ -14,8 +14,8 @@
 	    
 	    foreach ($objects as $object) {	
 ?>
-        <li <?php if ($object instanceof DataObject) {?>id="list-item-<?=$object->id;?>"<?php }?> class="<?php echo strtolower(get_class($object)); ?>">
-	    <?php if ($object instanceof DataObject) 
+        <li class="<?php echo strtolower(get_class($object)); ?>">
+	    <?php if (is_callable(array($object, 'view'))) 
 		echo $object->view($vars); ?>
 	</li>
 <?php
