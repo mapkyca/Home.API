@@ -10,7 +10,7 @@ I think so! :)
 What is it
 ----------
 
-Home.io is a simple and easily extendable pluggable api, which lets you simply connect all your domotic devices together and expose their functionality through a common API. It is designed with an eye on simplicity and extensibility.
+Home.API is a simple and easily extendable pluggable api, which lets you simply connect all your domotic devices together and expose their functionality through a common API. It is designed with an eye on simplicity and extensibility.
 
 Pre-requisites
 --------------
@@ -77,12 +77,12 @@ Format of a plugin
  * Plugins should be put in /plugins/ in a directory structure matching the class' namespace
  * All plugins must extend \home_api\plugins\Plugin, but don't have to sit in that namespace
  * All plugins classes should be in /plugins/my/class/namespace/MyClass/start.php (see the Example plugin for an example)
- * Public methods in the class are exposed automatically, Home.io uses reflection to determine required parameters and any default values. Again, see the Example plugin.
+ * Public methods in the class are exposed automatically, Home.API uses reflection to determine required parameters and any default values. Again, see the Example plugin.
 
 Licence & Copyright
 -------------------
 
-Unless stated otherwise, Home.IO is (C) Marcus Povey 2013.
+Unless stated otherwise, Home.API is (C) Marcus Povey 2013.
 
 It is made available under the MIT licence, other licences are available
 on request.
