@@ -4,7 +4,9 @@
     ksort($api);
     
     foreach ($api as $call => $definition) {
-
+        ?>
+        <a id="<?=str_replace('/','-',$call) ?>"></a>
+        <?php
         try {
             if ($plugin = home_io\plugins\Plugin::getInstance($definition))
                     echo $plugin->view();
