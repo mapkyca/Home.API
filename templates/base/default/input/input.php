@@ -29,7 +29,7 @@
 	 
 	// We always want a unique ID
 	global $input_id;
-	if (!$vars['id']) {
+	if (!isset($vars['id'])) {
 		$input_id ++;
 		$vars['id'] = $vars['name'] . "_$input_id";
 	}
@@ -59,7 +59,7 @@
 		}
 	?>
 	class="input <?php echo isset($vars['class']) ? $vars['class'] : 'input-' . (isset($vars['type']) ? $vars['type'] : 'text'); ?>"
-	<?php if ($vars['placeholder']) { ?>placeholder="<?php echo htmlentities($vars['placeholder'], ENT_QUOTES, 'UTF-8'); ?>" <?php } // Placeholder is a special case ?>
-	<?php if ($vars['alt']) { ?>alt="<?php echo htmlentities($vars['alt'], ENT_QUOTES, 'UTF-8'); ?>" <?php } // Alt is a special case ?>
+	<?php if (isset($vars['placeholder'])) { ?>placeholder="<?php echo htmlentities($vars['placeholder'], ENT_QUOTES, 'UTF-8'); ?>" <?php } // Placeholder is a special case ?>
+	<?php if (isset($vars['alt'])) { ?>alt="<?php echo htmlentities($vars['alt'], ENT_QUOTES, 'UTF-8'); ?>" <?php } // Alt is a special case ?>
 	value="<?php echo htmlentities($vars['value'], ENT_QUOTES, 'UTF-8'); ?>"
 /> 
