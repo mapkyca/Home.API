@@ -167,7 +167,7 @@ namespace home_io\api {
                     $object = Plugin::getInstance($definition);
                     
                     // Get method, and see what parameters it needs
-                    if (!$mirror_method = $mirror->getMethod($method))
+                    if ((!$mirror_method = $mirror->getMethod($method)) || (!in_array($mirror_method->getName(), $object->expose())))
                     {
                         Page::set404();
                         throw new APIException(i18n::w('api:exception:method_not_found', array($definition['class'], $method)));
