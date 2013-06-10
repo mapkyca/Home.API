@@ -1,7 +1,7 @@
 Home.API: An Extensible API for your House
 =========================================
 
-Modern homes contain an ever increasing number of inputs and outputs - smart electricity & water meters, Current Cost monitors, WeMo sockets and a whole smorgosboard of X10 enabled gizmos and homebrew Raspberry Pi hardware hacks.
+Modern homes contain an ever increasing number of inputs and outputs - smart electricity & water meters, Current Cost monitors, WeMo sockets and a whole Smörgåsbord of X10 enabled gizmos and homebrew Raspberry Pi hardware hacks.
 
 Wouldn't it be cool if you could control all of these from a central place? Wouldn't it be cool if you could simple expose a common API for all of these devices and talk to them using standard web technologies, lowering the bar to writing cool applications?
 
