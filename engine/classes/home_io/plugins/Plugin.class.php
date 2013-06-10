@@ -75,7 +75,7 @@ namespace home_io\plugins {
 
 
                         
-// We have a value, save it.
+                    // We have a value, save it.
                     $creation_parameters[] = $value;
                 }
             }
@@ -92,6 +92,12 @@ namespace home_io\plugins {
             return $object;
         }
 
+        /**
+         * Expose api.
+         * Return an array of method names to expose.
+         */
+        abstract public function expose();
+        
         /**
          * Autoload class files
          */

@@ -38,6 +38,10 @@ namespace example {
         public function sayhello($to = 'you') {
             return "Hello $to!";
         }
+
+        public function expose() {
+            return array('echoparams', 'asarray', 'sayhello');
+        }
     }
     
 }
