@@ -1,5 +1,5 @@
 Home.API: An Extensible API for your House
-=========================================
+==========================================
 
 Modern homes contain an ever increasing number of inputs and outputs - smart electricity & water meters, Current Cost monitors, WeMo sockets and a whole Smörgåsbord of X10 enabled gizmos and homebrew Raspberry Pi hardware hacks.
 
@@ -78,6 +78,11 @@ Format of a plugin
  * All plugins must extend \home_api\plugins\Plugin, but don't have to sit in that namespace
  * All plugins classes should be in /plugins/my/class/namespace/MyClass/start.php (see the Example plugin for an example)
  * Public methods in the class are exposed automatically, Home.API uses reflection to determine required parameters and any default values. Again, see the Example plugin.
+
+The Dashboard
+-------------
+
+Out of the box, Home.API comes with a simple dashboard which lists all the endpoints you have defined in your config. the default plugin template will list all the exposed api calls, and allow you to call them manually. This is primarily aimed as an illustration and dev tool, but it would be a simple matter to skin this to be something far more fancy.
 
 Licence & Copyright
 -------------------
