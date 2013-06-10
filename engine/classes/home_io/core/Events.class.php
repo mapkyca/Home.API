@@ -145,7 +145,9 @@ namespace home_io\core {
          * @return bool
          */
         public static function exists($namespace, $event) { 
-            return is_array(self::$events[$namespace][$event]);
+            if (isset(self::$events[$namespace][$event]))
+                return is_array(self::$events[$namespace][$event]);
+            return false;
         }
 
     }
