@@ -19,5 +19,12 @@ namespace home_io\i18n {
         'api:exception:missing_method_parameter' => 'Missing parameter "%s" missing in method "%s"',
     );
 
+    $dashboard = array(
+        'home_io:dashboard' => 'Dashboard',
+        'home_io:top' => 'Top',
+        
+    );
+    
     Basic::register($errors, 'en');
+    Basic::register($dashboard, 'en');
 }

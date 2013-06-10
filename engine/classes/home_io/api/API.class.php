@@ -103,6 +103,13 @@ namespace home_io\api {
         }
         
         /**
+         * Retrieve the registered API.
+         */
+        public static function get() {
+            return self::$api;
+        }
+        
+        /**
          * Register an API definition.
          * @param type $endpoint
          * @param type $definition

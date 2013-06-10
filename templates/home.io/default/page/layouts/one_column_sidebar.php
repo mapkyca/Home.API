@@ -1,9 +1,3 @@
-<?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
-<div class="row span2 pull-left">sklskdfjsldfjslkdf</div>
-<div class="row span9 pull-right">sklskdfjsldfjslkdf</div>
+<div class="row span3 pull-left"><?=$vars['sidebar'];?></div>
+<div class="row span8 pull-right">sklskdfjsldfjslkdf</div>
