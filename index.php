@@ -6,7 +6,6 @@
     if ((!$api) || (count($api) == 0))
     {    
         $content = home_io\templates\Template::getInstance()->screen('welcome');
- 
     }
     else
     {
