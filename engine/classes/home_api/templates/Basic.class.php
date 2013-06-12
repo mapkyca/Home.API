@@ -13,6 +13,8 @@
 
 namespace home_api\templates {
 
+    use \home_api\core\Events as Events;
+    
     /**
      * Default template system.
      * This can of course be replaced by something else.
