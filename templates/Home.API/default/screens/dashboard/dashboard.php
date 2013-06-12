@@ -10,7 +10,7 @@
         try {
             if ($plugin = home_api\plugins\Plugin::getInstance($definition))
                     echo $plugin->view(array('call' => $call));
-        } catch (\home_api\plugins\PluginException $e) {
+        } catch (\Exception $e) {
             ?>
 <div class="alert alert-error">
     <h1><?=$call; ?></h1>
