@@ -44,7 +44,7 @@ namespace power\smartmeters {
             exec("/bin/stty -F {$this->port} {$this->baud} sane raw cs8 hupcl cread clocal -echo -onlcr ");
             
             $fp=fopen("{$this->port}","c+");
-            if(!$fp) throw new \home_api\plugins\PluginException("Can't open device ({$this->port}:{$this->baud}), please make sure that the port is readable by your web server user.");
+            if(!$fp) throw new \home_api\plugins\PluginException(\home_api\i18n\i18n::w('currentcostenvir:exception:cant_open_device', array($this->port, $this->baud)));
             
             stream_set_blocking($fp,0);
             do{
