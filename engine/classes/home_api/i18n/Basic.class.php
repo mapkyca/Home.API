@@ -14,6 +14,8 @@
 
 namespace home_api\i18n {
 
+    use home_api\core\Events as Events;
+    
     /**
      * Default translation tool
      */
@@ -27,6 +29,19 @@ namespace home_api\i18n {
             include_once($path . $language . '.i18n.php');
             $this->current_language = $language;
             $this->basepath = $path;
+            
+            // Plugin boot, register new translations
+            Events::register('plugin', 'registered', array($this, '__pluginRegistered'));
+        }
+        
+        /**
+         * Load up a plugin's translations when registered.
+         * @param type $namespace
+         * @param type $event
+         * @param type $parameters
+         */
+        public function __pluginRegistered($namespace, $event, $parameters) { 
+            include_once($parameters['file_base'] . 'i18n/' . $this->current_language . '.i18n.php');
         }
         
         public static function register(array $translations, $language = 'en') {
