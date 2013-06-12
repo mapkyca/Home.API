@@ -27,6 +27,7 @@ namespace home_api\templates {
          */
         public function __construct($template_path) {
 
+            // Register paths
             $this->pushPath($template_path);
             
         }
