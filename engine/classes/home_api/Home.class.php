@@ -75,8 +75,11 @@ namespace home_api {
                 self::$config->docroot . 'templates/bootstrap/', 
                 self::$config->docroot . 'templates/base/'
             )));
+            \home_api\templates\Template::getInstance();
+            
             \home_api\core\SubsystemFactory::registerConstructor('i18n', '\home_api\i18n\Basic', array(self::$config->docroot . 'i18n/', 'en'));
-        
+            \home_api\i18n\i18n::getInstance();
+            
             // Boot plugins
             \home_api\plugins\Plugin::init();
             
