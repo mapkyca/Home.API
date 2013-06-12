@@ -28,6 +28,9 @@ namespace home_api\plugins {
          */
         public function view(array $vars = null) {
             $class = get_class($this);
+            if (preg_match('@\\\\([\w]+)$@', $class, $matches)) {
+                $class = $matches[1];
+            }
 
             if (!$vars)
                 $vars = array();
