@@ -30,6 +30,19 @@ namespace home_api\templates {
             // Register paths
             $this->pushPath($template_path);
             
+            // Plugin boot, register new templates
+            Events::register('plugin', 'registered', array($this, '__pluginRegistered'));
+            
+        }
+        
+        /**
+         * Load up a plugin's templates when registered.
+         * @param type $namespace
+         * @param type $event
+         * @param type $parameters
+         */
+        public function __pluginRegistered($namespace, $event, $parameters) { 
+            $this->pushPath($parameters['file_base'] . 'templates/');
         }
         
         /**
