@@ -41,7 +41,9 @@ namespace home_api\i18n {
          * @param type $parameters
          */
         public function __pluginRegistered($namespace, $event, $parameters) { 
-            include_once($parameters['file_base'] . 'i18n/' . $this->current_language . '.i18n.php');
+            $path = $parameters['file_base'] . 'i18n/' . $this->current_language . '.i18n.php';
+            if (file_exists($path))
+                    include_once($path);
         }
         
         public static function register(array $translations, $language = 'en') {
