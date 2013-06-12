@@ -81,7 +81,7 @@ namespace home_api\core {
             self::$events[$namespace][$event][$priority] = $handler;
 
             ksort(self::$events[$namespace][$event]);
-
+            
             return true;
         }
 
