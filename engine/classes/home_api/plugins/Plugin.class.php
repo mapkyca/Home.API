@@ -111,6 +111,7 @@ namespace home_api\plugins {
                 include_once($file_base . 'start.php');
 
                 // Tell everyone we've loaded a plugin, allow for registration of translations etc
+                \home_api\core\Log::debug("Plugin registered: $class ($file_base)");
                 \home_api\core\Events::trigger('plugin', 'registered', array(
                     'class' => $class,
                     'file_base' => $file_base
