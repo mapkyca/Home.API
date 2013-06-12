@@ -31,7 +31,7 @@ namespace home_api\core {
          * The function being registered must have the following prototype:
          *
          * \code
-         * 	function Object::foo($namespace, $event, $parameters)
+         * 	function Object::foo($namespace, $event, &$parameters)
          * 	{
          * 	    // Your code, return boolean false will stop any further events being processed
          * 	}
@@ -96,7 +96,7 @@ namespace home_api\core {
          * @param array $parameters Associated array of parameters.
          * @return bool
          */
-        public static function trigger($namespace, $event, array $parameters = NULL) {
+        public static function trigger($namespace, $event, array $parameters = NULL) {           
             $merged = array();
             if (!$parameters)
                 $parameters = array(
@@ -127,9 +127,13 @@ namespace home_api\core {
             }
 
             // Now sort and execute 
-            ksort($merged);
+            ksort($merged); 
             foreach ($merged as $function) {
-                $parameters = call_user_func_array($function, array($namespace, $event, $parameters));
+                $result = null;
+                
+                $result = call_user_func_array($function, array($namespace, $event, $parameters));
+                
+                if (isset($result)) $return = $result;
                 if ($parameters['halt'])
                     return $parameters['return'];
             }
