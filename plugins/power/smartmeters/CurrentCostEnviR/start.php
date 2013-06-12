@@ -59,7 +59,7 @@ namespace power\smartmeters {
 
               $data.=$c;
 
-            } while($c!="\n" && microtime(true)<$this->timeout); 
+            } while( (($c!="\n") && ($c!="\r"))  && microtime(true)<$this->timeout); 
             
             Log::debug("Read $data");
             
