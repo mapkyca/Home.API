@@ -129,7 +129,7 @@ namespace home_api\core {
             // Now sort and execute 
             ksort($merged);
             foreach ($merged as $function) {
-                $parameters = $function($namespace, $event, $parameters);
+                $parameters = call_user_func_array($function, array($namespace, $event, $parameters));
                 if ($parameters['halt'])
                     return $parameters['return'];
             }
