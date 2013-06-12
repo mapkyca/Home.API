@@ -107,7 +107,11 @@ namespace home_api\plugins {
             if (file_exists($file_base . 'start.php')) {
                 include_once($file_base . 'start.php');
 
-                // TODO Now boot languages etc
+                // Tell everyone we've loaded a plugin, allow for registration of translations etc
+                \home_api\core\Events::trigger('plugin', 'registered', array(
+                    'class' => $class,
+                    'file_base' => $file_base
+                ));
             }
         }
 
