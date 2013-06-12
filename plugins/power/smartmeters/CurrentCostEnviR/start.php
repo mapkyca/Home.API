@@ -96,7 +96,7 @@ namespace power\smartmeters {
             if (!isset($this->readData['power']))
                 throw new \home_api\plugins\PluginException(\home_api\i18n\i18n::w('currentcostenvir:exception:power_unavailable'));
             
-            return $this->readData['power'];
+            return (int)$this->readData['power'];
         }
         
         public function expose() {
