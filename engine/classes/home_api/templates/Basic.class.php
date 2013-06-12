@@ -66,7 +66,7 @@ namespace home_api\templates {
             foreach ($template_path as $index => $path)
                 $template_path[$index] = rtrim($path, '/') . '/';
             
-            $this->template_path = $template_path + $this->template_path;
+            $this->template_path = array_merge($template_path, $this->template_path);
             
         }
 
