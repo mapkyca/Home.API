@@ -27,14 +27,31 @@ namespace home_api\templates {
          */
         public function __construct($template_path) {
 
+            $this->pushPath($template_path);
+            
+        }
+        
+        /**
+         * Register a template path.
+         * Push a template path to the top of the stack.
+         * @param type $template_path
+         */
+        public function pushPath($template_path) {
+            
+            // Make sure we have a consistent type
             if (!is_array($template_path))
-                $this->template_path = array($template_path);
-            else
-                $this->template_path = $template_path;
-
-            // Sort paths
-            foreach ($this->template_path as $index => $path)
-                $this->template_path[$index] = rtrim($path, '/') . '/';
+                $template_path = array($template_path);
+            
+            // Make sure we've created storage
+            if (!isset($this->template_path))
+                $this->template_path = array();
+            
+            // Sanitise paths
+            foreach ($template_path as $index => $path)
+                $template_path[$index] = rtrim($path, '/') . '/';
+            
+            $this->template_path = $template_path + $this->template_path;
+            
         }
 
         public function view($view, array $vars = null, $viewtype = 'default') {
