@@ -71,30 +71,36 @@ namespace home_api\templates {
 
             $pre = $main = $post = null;
             
-            ob_start();
+            //ob_start();
             if ($this->viewExists($view, $viewtype)) {
+                
+                // Prepend view
+                ob_start();
+                \home_api\core\Events::trigger("view:$viewtype:".str_replace('/',':',$view), 'prepend', array_merge($vars, array('return' => true)));
+                $pre = ob_get_clean();
+
+                ob_start();
                 foreach ($this->template_path as $base) {
-                    // Prepend view
-                    ob_start();
-                    \home_api\core\Events::trigger("view:$viewtype:".str_replace('/',':',$view), 'prepend', array_merge($vars, array('return' => true)));
-                    $pre = ob_get_clean();
-                    
+                   
                     // Include base view
                     if (file_exists($base . "$viewtype/$view.php")) {
                         include($base . "$viewtype/$view.php");
                         break;
                     }
                     
-                    // Extend view 
-                    ob_start();
-                    \home_api\core\Events::trigger("view:$viewtype:".str_replace('/',':',$view), 'extend', array_merge($vars, array('return' => true)));
-                    $post = ob_get_clean();
                 }
+                $middle = ob_get_clean();
+                
+                // Extend view 
+                ob_start(); 
+                \home_api\core\Events::trigger("view:$viewtype:".str_replace('/',':',$view), 'extend', array_merge($vars, array('return' => true)));
+                $post = ob_get_clean();
+                
             } else {
                 \home_api\core\Log::warning("Template $viewtype/$view could not be found.");
             }
 
-            return $pre . ob_get_clean() . $post;
+            return $pre . $middle/*ob_get_clean()*/ . $post;
         }
 
         public function viewExists($view, $viewtype = 'default') {
