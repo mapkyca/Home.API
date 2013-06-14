@@ -52,7 +52,7 @@ namespace home_api\storage\nosql {
         public static function generateUUID($class, $name) {
 
             $classname = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($class));
-            $name = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($name));
+            $name = preg_replace("/[^a-zA-Z0-9\s]/", "", $name);
 
             return "{$classname}-{$name}";
         }
