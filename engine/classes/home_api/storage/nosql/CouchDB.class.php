@@ -145,16 +145,48 @@ namespace home_api\storage\nosql {
             return true;
         }
 
+        /**
+         * Delete a UUID
+         * @param type $uuid The UUID to get
+         * @param array $params Optional parameters
+         * @return mixed The revision ID, or false
+         */
         public function delete($uuid, array $params = null) {
             $result = $this->query(COUCHDB_METHOD_PUT, $uuid, $params, $data);
+            if ($result->ok)
+                return $result->rev;
+            
+            return false;
         }
         
+        /**
+         * Retrieve a UUID
+         * @param type $uuid The UUID to get
+         * @param array $params Optional parameters
+         * @return mixed The revision ID, or false
+         */
         public function retrieve($uuid, array $params = null) {
             return $this->query(COUCHDB_METHOD_GET, $uuid, $params);
+            
+            if ($result->ok)
+                return $result->rev;
+            
+            return false;
         }
 
+        /**
+         * Store some data
+         * @param type $uuid
+         * @param type $data
+         * @return mixed The revision ID, or false
+         */
         public function store($uuid, $data, array $params = null) {
             $result = $this->query(COUCHDB_METHOD_PUT, $uuid, $params, $data);
+            
+            if ($result->ok)
+                return $result->rev;
+            
+            return false;
         }
         
         
