@@ -76,6 +76,10 @@ namespace home_api {
                 self::$config->docroot . 'templates/base/'
             )));
             \home_api\core\SubsystemFactory::registerConstructor('i18n', '\home_api\i18n\Basic', array(self::$config->docroot . 'i18n/', 'en'));
+            \home_api\core\SubsystemFactory::registerConstructor('nosqlstorage', '\home_api\storage\nosql\CouchDB', array(
+                'home_api', // DB Name, don't change unless you have to.
+                isset(self::$config->couchdburl) ? self::$config->couchdburl : 'http://localhost:5984/' // Couch DB connection settings, again defaults fine for most
+            ));
             
             // Boot these since we need to to support plugin specific boot templates and translations. May find a better way eventually
             \home_api\templates\Template::getInstance();

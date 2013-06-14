@@ -11,6 +11,7 @@
  * - $CONFIG->temp (filepath) : Override temp directory settings (recommended you leave this as default unless you're having trouble on your system)
  * - $CONFIG->docroot (filepath) : Physical location of schedulables files (in 99.999% of the time it is best to leave this auto detected)
  * - $CONFIG->site_secret (string) : Site secret key used for various things, including form token generation. It is safe, and recommended, to leave this auto generated
+ * - $CONFIG->couchdburl (url) : Couch DB storage engine connection string, e.g. http://localhost:5984/
  * - $CONFIG->debug (bool) : Debug on/off
  * 
  * @package core
