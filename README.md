@@ -17,6 +17,7 @@ Pre-requisites
 
  * Apache2 with ModRewrite enabled
  * PHP 5.3+
+ * CouchDB 
 
 Installation
 ------------
