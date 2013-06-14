@@ -14,6 +14,7 @@
 namespace home_api\plugins {
 
     use home_api\templates\Template as Template;
+    use home_api\i18n\i18n as i18n;
 
     /**
      * Plugin root class.
