@@ -46,7 +46,7 @@ namespace home_api\storage\nosql {
          * Return the current nosql storage engine
          * 
          * @throws SubsystemFactoryException if no template is defined.
-         * @return Template
+         * @return NoSQLStorage
          */
         public static function &getInstance() {
             if (!self::$engine)
