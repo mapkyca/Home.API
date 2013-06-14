@@ -20,7 +20,7 @@ namespace home_api\storage\nosql {
      */
     abstract class NoSQLStorage {
         
-        private $engine;
+        private static $engine;
         
         /**
          * Create new database.
@@ -41,6 +41,22 @@ namespace home_api\storage\nosql {
          * Retrieve an object.
          */
         abstract public function retrieve($uuid, array $params = null);
+     
+        
+        /**
+         * Generate a UUID from a class and a given name.
+         * Use so that plugins can be sure that they're storing data within their own namespaces.
+         * @param type $class A class, typically $this, when called within plugins
+         * @param type $name The name of the thing you're storing
+         */
+        public static function generateUUID($class, $name) {
+
+            $classname = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($class));
+            $name = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($name));
+
+            return "{$classname}-{$name}";
+        }
+
         
         /**
          * Return the current nosql storage engine
@@ -63,19 +79,4 @@ namespace home_api\storage\nosql {
             self::$engine = $engine;
         }
     }
-    
-    /**
-     * Generate a UUID from a class and a given name.
-     * Use so that plugins can be sure that they're storing data within their own namespaces.
-     * @param type $class A class, typically $this, when called within plugins
-     * @param type $name The name of the thing you're storing
-     */
-    function generateUUID($class, $name) {
-        
-        $classname = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($class));
-        $name = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($name));
-        
-        return "{$classname}-{$name}";
-    }
-    
 }
