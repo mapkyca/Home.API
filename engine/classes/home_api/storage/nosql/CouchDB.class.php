@@ -108,7 +108,7 @@ namespace home_api\storage\nosql {
                 default:
             }
             
-            curl_setopt($http, CURLOPT_HTTPHEADER, $http_headers);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $http_headers);
             
             $result = curl_exec($ch);
             
