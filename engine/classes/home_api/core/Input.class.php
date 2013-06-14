@@ -77,7 +77,7 @@ namespace home_api\core {
          * @param callable $filter_hook Optional hook for input filtering, takes one parameter and returns the filtered version. eg function($var){return htmlentities($var);}
          * @return string|false
          */
-        public static function getPOST($filter_hook) {
+        public static function getPOST($filter_hook = null) {
             global $GLOBALS;
 
             $post = '';
@@ -92,7 +92,7 @@ namespace home_api\core {
             // If we have some results then return them
             if ($post) {
 
-                if (is_callable($filter_hook))
+                if ((isset($filter_hook)) && (is_callable($filter_hook)))
                     $post = $filter_hook($post);
 
                 return $post;
