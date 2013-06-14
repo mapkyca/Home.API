@@ -14,6 +14,7 @@ namespace home_api\storage\nosql {
     
     use home_api\i18n\i18n as i18n;
     use home_api\storage\StorageException as StorageException;
+    use home_api\core\Log as Log;
     
     /**
      * Definitions for CouchDB storage engine.
@@ -49,6 +50,8 @@ namespace home_api\storage\nosql {
             if (!$db)
                 $db = $this->dbname;
             
+            Log::debug("Sending $method query to $db");
+            
             // Build Params
             $params = null;
             if ($parameters) {
@@ -65,7 +68,6 @@ namespace home_api\storage\nosql {
             
             // Headers
             $http_headers = array(
-                'Accept: application/json,text/html,text/plain,*/*' , 
                 'Content-Type: application/json'
             );
             
@@ -76,39 +78,56 @@ namespace home_api\storage\nosql {
             $ch = curl_init($url);
             
             // Set basic options
-            curl_setopt_array($ch, array(
+            $options = array(
                 CURLOPT_USERAGENT => "Home.API-$version",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYPEER => false,
                 CURLOPT_SSL_VERIFYHOST => false,
                 CURLOPT_HEADER => false,
-                CURLOPT_FOLLOWLOCATION => true
-            ));
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => 'utf-8'
+            );
             
             // Decide method
             switch ($method) {
                 case COUCHDB_METHOD_COPY:
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'COPY');
+                    $options[CURLOPT_CUSTOMREQUEST] = 'COPY';
                     $http_headers[] = "Destination: " . json_encode($payload);
                     break;
                 case COUCHDB_METHOD_DELETE:
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                    $options[CURLOPT_CUSTOMREQUEST] = 'DELETE';
                     break;
                 case COUCHDB_METHOD_PUT:
-                    curl_setopt($ch, CURLOPT_PUT, true);
-                    if ($payload)
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+                   // $options[CURLOPT_PUT] = true;
+                    $options[CURLOPT_CUSTOMREQUEST] = 'PUT';
+                    
+                    if ($payload) {
+                        $payload = json_encode($payload);
+                        Log::debug ("Sending " . strlen ($payload) . " bytes of payload data.");
+                        Log::debug("Payload: " . $payload);
+                        $options[CURLOPT_POSTFIELDS] = $payload;
+                        
+                        $http_headers[] = "Content-Length: " . strlen($payload);
+                    }
                     break;
                 case COUCHDB_METHOD_POST:
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    if ($payload)
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+                    $options[CURLOPT_POST] = true;
+                    if ($payload) {
+                        $payload = json_encode($payload);
+                        Log::debug ("Sending " . strlen ($payload) . " bytes of payload data.");
+                        Log::debug("Payload: " . $payload);
+                        $options[CURLOPT_POSTFIELDS] = $payload;
+                        
+                        $http_headers[] = "Content-Length: " . strlen($payload);
+                    }
                     break;
                 case COUCHDB_METHOD_GET :
                 default:
             }
             
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $http_headers);
+            $options[CURLOPT_HTTPHEADER] = $http_headers;
+            
+            curl_setopt_array($ch, $options);
             
             $result = curl_exec($ch);
             
@@ -121,6 +140,8 @@ namespace home_api\storage\nosql {
             
             if ($result === NULL)
                 throw new StorageException(i18n::w('couchdb:exception:result_not_json'));
+            
+            Log::debug("Query returned by " . print_r($result, true));
             
             return $result;
         }
@@ -153,7 +174,7 @@ namespace home_api\storage\nosql {
          */
         public function delete($uuid, array $params = null) {
             $result = $this->query(COUCHDB_METHOD_PUT, $uuid, $params, $data);
-            if ($result->ok)
+            if (!isset($result->error))
                 return $result->rev;
             
             return false;
@@ -166,10 +187,10 @@ namespace home_api\storage\nosql {
          * @return mixed The revision ID, or false
          */
         public function retrieve($uuid, array $params = null) {
-            return $this->query(COUCHDB_METHOD_GET, $uuid, $params);
+            $result = $this->query(COUCHDB_METHOD_GET, $uuid, $params);
             
-            if ($result->ok)
-                return $result->rev;
+            if (!$result->error)
+                return $result;
             
             return false;
         }
@@ -183,7 +204,7 @@ namespace home_api\storage\nosql {
         public function store($uuid, $data, array $params = null) {
             $result = $this->query(COUCHDB_METHOD_PUT, $uuid, $params, $data);
             
-            if ($result->ok)
+            if (isset($result->ok))
                 return $result->rev;
             
             return false;
