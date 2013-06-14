@@ -18,6 +18,10 @@ namespace home_api\i18n {
         'plugin:exception:no_constructor' => 'I don\'t know how to create "%s" as the class has no constructor',
         'plugin:exception:missing_construction_parameter' => 'Missing parameter "%s" missing in class %s\'s constructor',
         'plugin:exception:could_not_create_instance' => 'Could not create new instance of class "%s"',
+        // Couch DB
+        'couchdb:exception:curl_not_installed' => 'Sorry, cURL is not installed.',
+        'couchdb:exception:no_result' => 'No result returned from server',
+        'couchdb:exception:result_not_json' => 'Result returned was not valid JSON',
     );
 
     $dashboard = array(
