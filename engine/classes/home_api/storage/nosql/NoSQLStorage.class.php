@@ -64,4 +64,18 @@ namespace home_api\storage\nosql {
         }
     }
     
+    /**
+     * Generate a UUID from a class and a given name.
+     * Use so that plugins can be sure that they're storing data within their own namespaces.
+     * @param type $class A class, typically $this, when called within plugins
+     * @param type $name The name of the thing you're storing
+     */
+    function generateUUID($class, $name) {
+        
+        $classname = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($class));
+        $name = preg_replace("/[^a-zA-Z0-9\s]/", "", get_class($name));
+        
+        return "{$classname}-{$name}";
+    }
+    
 }
