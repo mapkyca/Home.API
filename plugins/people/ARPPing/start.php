@@ -39,6 +39,9 @@ namespace people {
         
         public function athome() {
 
+            $return = new \stdClass();
+            $return->name = $this->name;
+            
             ob_start();
                 passthru("cat " . escapeshellcmd("/proc/net/arp"));
             $result = ob_get_clean();
@@ -48,11 +51,13 @@ namespace people {
             {
                 // Yes, so try and ping it to make sure.
                 system('ping -c 1 -W 5 `cat /proc/net/arp | grep "'.escapeshellcmd($this->mac).'" | cut -d" " -f 1` >/dev/null', $val); // Depending on your network this may or may not be too reliable... TODO: Make it less flipfloppy
-                if ($val == 0)
-                    return true;
+                if ($val == 0) 
+                    $return->athome = true;
+                
             }
                 
-            return false;
+            $return->athome = false;
+            return $return;
             
         }
         
