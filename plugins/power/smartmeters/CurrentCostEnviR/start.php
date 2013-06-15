@@ -99,8 +99,15 @@ namespace power\smartmeters {
             return (int)$this->readData['power'];
         }
         
+        public function latest() {
+            if (!isset($this->readData))
+                $this->readline ();
+            
+            return $this->readData;
+        }
+        
         public function expose() {
-            return array('time', 'temp', 'power');
+            return array('time', 'temp', 'power', 'latest');
         }        
     }
     
