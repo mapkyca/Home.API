@@ -19,7 +19,7 @@ header('Etag: ' . md5($js));
 header('Content-Length: ' . strlen($js));
 header('Content-Type: text/javascript');
 
-// We never want this to expire, since we're going to be changing the version on CSS updates
+// We never want this to expire, since we're going to be changing the version on JS updates
 header('Expires: ' . date('r', strtotime("+6 months")), true);
 header("Pragma: public", true);
 header("Cache-Control: public", true);
