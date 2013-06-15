@@ -67,6 +67,9 @@ namespace power\smartmeters {
             preg_match('/<watts>([0-9]+)<\/watts>/', $data, $matches); $this->readData['power'] = $matches[1];
             preg_match('/<time>([0-9\.\:]+)<\/time>/', $data, $matches); $this->readData['time'] = $matches[1];
             preg_match('/<tmpr>([0-9\.]+)<\/tmpr>/', $data, $matches); $this->readData['temp'] = $matches[1];
+            
+            // Tidy up power
+            if ($this->readData['power']) $this->readData['power'] = (int)$this->readData['power'];
         }
 
         public function time() {
