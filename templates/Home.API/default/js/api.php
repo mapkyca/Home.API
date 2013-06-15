@@ -22,13 +22,13 @@ HomeAPI.call = function(api, data, handler, method) {
 
    if (method == 'POST')
    {
-        $.ajax(
+        $.ajax({
             type: "POST",
             url: baseurl + api, 
             data: data, 
             success: handler,
-            dataType: 'json'
-        );
+            dataType: "json"
+        });
    }
    else
    {
