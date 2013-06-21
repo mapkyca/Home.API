@@ -77,7 +77,7 @@ namespace home_api {
             )));
             \home_api\core\SubsystemFactory::registerConstructor('i18n', '\home_api\i18n\Basic', array(self::$config->docroot . 'i18n/', 'en'));
             \home_api\core\SubsystemFactory::registerConstructor('nosqlstorage', '\home_api\storage\nosql\CouchDB', array(
-                'home_api', // DB Name, don't change unless you have to.
+                isset(self::$config->couchdb) ? self::$config->couchdb : 'home_api', // DB Name, don't change unless you have to.
                 isset(self::$config->couchdburl) ? self::$config->couchdburl : 'http://localhost:5984/' // Couch DB connection settings, again defaults fine for most
             ));
             
