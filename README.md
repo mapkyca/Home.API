@@ -97,4 +97,4 @@ on request.
 ------------------
 
  * Twitter Bootstrap, distributed under the Apache 2.0 license. <https://github.com/twitter/bootstrap>
- * jQuery, distributed under the MIT License. Source: https://github.com/jquery/jquery
+ * jQuery, distributed under the MIT License. Source: <https://github.com/jquery/jquery>
