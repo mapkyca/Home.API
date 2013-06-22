@@ -12,6 +12,7 @@
  * - $CONFIG->docroot (filepath) : Physical location of schedulables files (in 99.999% of the time it is best to leave this auto detected)
  * - $CONFIG->site_secret (string) : Site secret key used for various things, including form token generation. It is safe, and recommended, to leave this auto generated
  * - $CONFIG->couchdburl (url) : Couch DB storage engine connection string, e.g. http://localhost:5984/
+ * - $CONFIG->couchdb (string) : Couch DB (defaults to home_api)
  * - $CONFIG->debug (bool) : Debug on/off
  * 
  * @package core
