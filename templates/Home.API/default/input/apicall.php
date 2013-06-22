@@ -3,7 +3,7 @@
     $parameters = $method->getParameters();
 ?>
 <form id="<?=$vars['id'];?>" class="api-call form-inline" action="<?=\home_api\core\Environment::getWebRoot();?>api/<?=$vars['call'];?>/<?=$method->getName();?>.json"> 
-    <?=$method->getName(); ?> ( 
+    <span title="<?=\home_api\core\Environment::getWebRoot();?>api/<?=$vars['call'];?>/<?=$method->getName();?>.json"><?=$method->getName(); ?></span> ( 
 
     <?php
     $form = "";
