@@ -12,7 +12,7 @@
  */
 global $version, $release;
 
-$version = 2013062201; // System readable version YYYYMMDDNN (where NN is a daily counter)
+$version = 2013062401; // System readable version YYYYMMDDNN (where NN is a daily counter)
 $release = "1.0"; // Human readable 
 	
 header("X-Home.API-Build: v$release($version)");
